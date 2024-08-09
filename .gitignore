@@ -10,7 +10,10 @@
 pocketbase.exe
 pocketbase
 pocketbase.db
+data.db
 logs.db
+logs.db-shm
+logs.db-wal
 data.db-shm
 data.db-wal
 
