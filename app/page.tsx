@@ -5,6 +5,8 @@ import Entry from "./Entry";
 import { getEntries } from "../services/entryService";
 import React from 'react';
 
+//test
+
 const Content: React.FC = async () => {
   const entries = await getEntries();
 
