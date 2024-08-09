@@ -10,6 +10,9 @@
 pocketbase.exe
 pocketbase
 pocketbase.db
+logs.db
+data.db-shm
+data.db-wal
 
 # testing
 /coverage
