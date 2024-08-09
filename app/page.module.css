@@ -5,6 +5,25 @@
     height: 100vh; /* Full height of the viewport */
 }
 
+.rows {
+  margin-top: 2rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  max-width: 70vw;
+}
+
+.note {
+  height: auto;
+  width: 200px;
+  padding: 0.2rem 1rem;
+  margin: 0.5rem;
+  background: #ffff00;
+  box-shadow: 4px 4px 8px 1px #00000075;
+  border-radius: 2px;
+}
+
 .sidebar {
     width: 16.875%; /* 324px / 1920px * 100% */
     min-width: 324px; /* Ensures the sidebar doesn't shrink below 324px */
