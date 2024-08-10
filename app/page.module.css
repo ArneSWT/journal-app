@@ -1,8 +1,8 @@
 .container {
     display: flex;
     width: 100vw; /* Full width of the viewport */
-    height: 100vh; /* Full height of the viewport */
-    overflow: hidden;
+    height: 100vh;
+    overflow-y: hidden;
 }
 
 .rows {
@@ -14,8 +14,12 @@
   max-width: 70vw;
 }
 
+.placeholder {
+  min-height: 50vh;
+}
+
 .entrycontainer {
-  height: 50vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   flex-flow: column-reverse;
@@ -44,6 +48,7 @@
   padding: 0.2rem 1rem;
   margin: 0.5rem;
   border-radius: 2px;
+  border: 1px solid #747474;
 }
 
 .textarea {
