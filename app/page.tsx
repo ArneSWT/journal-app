@@ -1,21 +1,35 @@
-"use client";
+'use client'
 
 import styles from "./page.module.css";
 import Entry from "./Entry";
+import Sidebar from "./Sidebar";
 import { getEntries } from "../services/entryService";
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-//test
-//test 
-//TEST3
+interface EntryType {
+  id: string;
+  text: string;
+  content: string;
+  created: string;
+  // Add other fields as necessary
+}
 
-const Content: React.FC = async () => {
-  const entries = await getEntries();
+const Content: React.FC = () => {
+  const [entries, setEntries] = useState<EntryType[]>([]);
+
+  useEffect(() => {
+    const fetchEntries = async () => {
+      const fetchedEntries: EntryType[] = await getEntries();
+      setEntries(fetchedEntries.reverse());
+    };
+
+    fetchEntries();
+  }, []);
 
   return (
-    <div>
-      <h1>Entries</h1>
-      <div className={styles.grid}>
+    <div className={styles.container}>
+      <Sidebar />
+      <div className={styles.entrycontainer}>
         {entries?.map((entry) => (
           <Entry key={entry.id} entry={entry} />
         ))}

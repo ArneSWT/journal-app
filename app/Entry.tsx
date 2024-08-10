@@ -11,6 +11,15 @@ interface EntryProps {
   };
 }
 
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  return new Intl.DateTimeFormat('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  }).format(date);
+};
+
 const Entry: React.FC<EntryProps> = ({ entry }) => {
   const [text, setText] = useState(entry.text);
   const [isSaving, setIsSaving] = useState(false);
@@ -57,9 +66,9 @@ const Entry: React.FC<EntryProps> = ({ entry }) => {
   */
 
   return (
-    <div className={styles.note}>
-      <p>{entry.created}</p>
-      <textarea value={text} onChange={handleTextChange} />
+    <div className={styles.entry}>
+      <p className={styles.entrydate}>{formatDate(entry.created)}</p>
+      <textarea className={styles.textarea} value={text} onChange={handleTextChange} />
       {isSaving && <p>Saving...</p>}
     </div>
   );
