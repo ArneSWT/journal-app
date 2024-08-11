@@ -7,12 +7,11 @@ import { getEntries } from "../services/entryService";
 import React, { useEffect, useState, useRef, use } from 'react';
 
 // Define the type for the entry object
-interface EntryType {
+interface EntryProps {
   id: string;
   text: string;
   created: string;
 }
-
 
 /**
  * Component that displays the whole page, 
@@ -29,13 +28,15 @@ const Content: React.FC = () => {
    * useState<EntryType[]>([]) -> 
    * initializes the state value with an empty array of EntryType objects
   */
-  const [entries, setEntries] = useState<EntryType[]>([]);
+  const [entries, setEntries] = useState<EntryProps[]>([]);
+  const [date, setDate] = useState<EntryProps[]>([]);
 
   // useEffect is a React hook that runs after the first render
   useEffect(() => {
     const fetchEntries = async () => {
-      const fetchedEntries: EntryType[] = await getEntries();
+      const fetchedEntries: EntryProps[] = await getEntries();
       setEntries(fetchedEntries.reverse()); 
+      setDate(fetchedEntries);
     };
 
     fetchEntries();
@@ -43,7 +44,7 @@ const Content: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <Sidebar />
+      <Sidebar calendar={date} />
       <div className={styles.entrycontainer}>
         <div className={styles.placeholder}></div>
         {entries?.map((entry) => (
@@ -56,4 +57,4 @@ const Content: React.FC = () => {
   );
 };
 
-export default Content;
+export default Content

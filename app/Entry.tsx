@@ -43,27 +43,7 @@ const Entry: React.FC<EntryProps> = ({ entry }) => {
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(e.target.value);
     debouncedSave(entry.id, e.target.value);
-  };
-
-  /*
-  useEffect(() => {
-    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
-      if (isSaving) {
-        e.preventDefault();
-        e.returnValue = '';
-      }
-    };
-
-    window.addEventListener('beforeunload', handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-      if (isSaving) {
-        saveUpdatedText(entry.id, text);
-      }
-    };
-  }, [isSaving, text, entry.id]);
-  */
+  }
 
   return (
     <div className={styles.entry}>
