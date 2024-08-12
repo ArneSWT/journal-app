@@ -69,10 +69,11 @@
 
 .sidebar {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   width: 16.875%; /* 324px / 1920px * 100% */
   min-width: 324px; /* Ensures the sidebar doesn't shrink below 324px */
   border-right: 1px solid #747474; /* Sidebar border */
+
 }
   
   /* Main content styling */
@@ -83,8 +84,8 @@
 
 .month {
   font-weight: bold;
-    margin-top: 1rem;
 }
+
 .month_container {
   margin-left: 50px;
   display: flex;
@@ -102,17 +103,23 @@
   overflow-y: scroll;
   flex-direction: column;
   flex-flow: column-reverse;
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+}
+.calendar_container::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
 }
 
 .sticky {
   position: -webkit-sticky; /* For Safari */
   position: sticky;
-  top: 0;
-  left: 100px;
+  top: 1rem;
   transform: translateX(-200px) translateY(1rem);
   z-index: 1000; /* Ensure it stays above other content */
 }
   
 .day {
   margin-left: 1rem;
+  margin-bottom: 1rem;
 }

@@ -50,11 +50,17 @@ const Sidebar: React.FC<SidebarProps> = ({calendar}) => {
       <div className={styles.calendar_container}>
         {months.slice().reverse().map((month, monthIndex) => (
           <div key={monthIndex}>
-            <div className={`${styles.month} ${styles.sticky}`}>{
+            <div className={styles.sticky}>
+            <p className={`${styles.month}}`}>{
               month.toLocaleString('default', { month: 'long' })}
+            </p>
+            <p>
+              2024
+            </p>
             </div>
+  
             {Array.from({ length: new Date(currentYear, monthIndex + 1, 0).getDate() }, (_, dayIndex) => (
-              <div key={dayIndex} className={styles.day}>{dayIndex + 1}</div>
+              <p key={dayIndex} className={styles.day}>{dayIndex + 1}</p>
             ))}
           </div> 
         ))}
