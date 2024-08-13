@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import pb from '../services/pocketbase';
+import styles from "./page.module.css";
+
 
 export const dynamic = "auto",
   dynamicParams = true,
