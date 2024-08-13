@@ -18,6 +18,12 @@
   min-height: 50vh;
 }
 
+.pagecontainer {
+  display: flex;
+  flex-direction: column;
+  
+}
+
 .entrycontainer {
   height: 100vh;
   display: flex;
@@ -142,7 +148,6 @@
   align-items: center;
   margin-bottom: 1rem;
   width: 36px;
-  padding-top: 7px;
 }
 .highlight {
   background-color: white;

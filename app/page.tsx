@@ -5,6 +5,7 @@ import Entry from "./Entry";
 import Sidebar from "./Sidebar";
 import { getEntries } from "../services/entryService";
 import React, { useEffect, useState, useRef } from 'react';
+import CreateEntry from "./CreateEntry";
 
 // Define the type for the entry object
 interface EntryProps {
@@ -24,6 +25,7 @@ const Content: React.FC = () => {
   const [date, setDate] = useState<EntryProps[]>([]);
   const [visibleEntries, setVisibleEntries] = useState<Set<string>>(new Set());
 
+  // Fetch entries from the server
   useEffect(() => {
     const fetchEntries = async () => {
       const fetchedEntries: EntryProps[] = await getEntries();
@@ -34,6 +36,7 @@ const Content: React.FC = () => {
     fetchEntries();
   }, []);
 
+  // Create an IntersectionObserver to track which entries are visible
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -49,26 +52,33 @@ const Content: React.FC = () => {
       });
     }, { threshold: 0.5 });
 
+    // Observe all entry elements
     const entryElements = document.querySelectorAll('.entry');
     entryElements.forEach(element => observer.observe(element));
 
+    // Cleanup
     return () => {
       entryElements.forEach(element => observer.unobserve(element));
     };
-  }, [entries]);
+  }, [entries]); // Re-run the effect when the entries change
 
+  /*
   //filters out all unique dates of entries
   const uniqueDates = new Set<string>();
   entries.forEach(entry => {
     const date = new Date(entry.created).toISOString().split('T')[0]; // Extract date part
     uniqueDates.add(date);
   });
+  */
 
   return (
     <div className={styles.container}>
       <Sidebar calendar={date} visibleEntries={visibleEntries}/>
+
+      { /* Display all entries */}
       <div className={styles.entrycontainer}>
         <div className={styles.placeholder}></div>
+        <CreateEntry />
         {entries?.map((entry) => (
           <Entry 
             key={entry.id} 
@@ -77,8 +87,8 @@ const Content: React.FC = () => {
             id={entry.id}
           />
         ))}
-      </div>
       
+      </div>
       
       <div className={styles.visibleEntries}>
         <h2>Visible Entries</h2>
@@ -98,5 +108,6 @@ const Content: React.FC = () => {
     </div>
   );
 };
+
 
 export default Content;
