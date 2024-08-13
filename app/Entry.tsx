@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { updateEntry } from '../services/entryService';
 import useDebounce from '../hooks/useDebounce';
 import styles from './page.module.css';
@@ -9,9 +9,8 @@ interface EntryProps {
     text: string;
     created: string;
   };
-}
-interface HighlightProps {
-  sendToParent: (data: string) => void;
+  className?: string;
+  id?: string;
 }
 
 const formatDate = (dateString: string) => {
@@ -23,11 +22,9 @@ const formatDate = (dateString: string) => {
   }).format(date);
 };
 
-const Entry: React.FC<EntryProps> = ({ entry }) => {
+const Entry: React.FC<EntryProps> = ({ entry, className, id }) => {
   const [text, setText] = useState(entry.text);
   const [isSaving, setIsSaving] = useState(false);
-  const [isInView, setIsInView] = useState(false);
-  const entryRef = useRef<HTMLDivElement>(null);
 
   const saveUpdatedText = async (id: string, text: string) => {
     setIsSaving(true);
@@ -50,31 +47,11 @@ const Entry: React.FC<EntryProps> = ({ entry }) => {
     debouncedSave(entry.id, e.target.value);
   };
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsInView(entry.isIntersecting);
-      },
-      { threshold: 1 } // Adjust the threshold as needed
-    );
-
-    if (entryRef.current) {
-      observer.observe(entryRef.current);
-    }
-
-    return () => {
-      if (entryRef.current) {
-        observer.unobserve(entryRef.current);
-      }
-    };
-  }, []);
-
   return (
-    <div ref={entryRef} className={styles.entry}>
+    <div className={`${styles.entry} ${className}`} id={id}>
       <p className={styles.entrydate}>{formatDate(entry.created)}</p>
       <textarea className={styles.textarea} value={text} onChange={handleTextChange} />
       {isSaving && <p>Saving...</p>}
-      {isInView && <p>Entry is in view</p>}
     </div>
   );
 };

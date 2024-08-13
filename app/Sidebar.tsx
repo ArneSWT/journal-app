@@ -10,7 +10,7 @@ interface CalendarProps {
 
 interface SidebarProps {
   calendar: CalendarProps[];
-  highlightedDates: string[];
+  visibleEntries: Set<string>;
 }
 
 //returns just the day of the date
@@ -22,7 +22,7 @@ const formatDate = (dateString: string) => {
 };
 
 
-const Sidebar: React.FC<SidebarProps> = ({calendar}) => {
+const Sidebar: React.FC<SidebarProps> = ({calendar, visibleEntries}) => {
   const currentYear = new Date().getFullYear();
   const currentMonth = new Date().getMonth();
   const currentDate = new Date().getDate();
@@ -39,6 +39,16 @@ const Sidebar: React.FC<SidebarProps> = ({calendar}) => {
     }
     uniqueDates.add(formattedDate);
     return true;
+  });
+
+  // Extract dates from visible entries
+  const visibleDates = new Set<string>();
+  visibleEntries.forEach(id => {
+    const entry = calendar.find(entry => entry.id === id);
+    if (entry) {
+      const date = new Date(entry.created).toISOString().split('T')[0];
+      visibleDates.add(date);
+    }
   });
 /*
   return (
@@ -62,10 +72,17 @@ return (
             <p className={styles.year}>{currentYear}</p>
           </div>
           <div className={styles.days_container}>
-            {Array.from({ length: monthIndex === 0 ? currentDate : new Date(currentYear, currentMonth - monthIndex + 1, 0).getDate() }, (_, dayIndex) => (
-              <p key={dayIndex} className={styles.day}>{dayIndex + 1}</p>
-            ))}
-          </div>
+          {Array.from({ length: monthIndex === 0 ? currentDate : new Date(currentYear, currentMonth - monthIndex + 1, 0).getDate() }, (_, dayIndex) => {
+            const day = dayIndex;
+            const date = new Date(currentYear, currentMonth - monthIndex, day + 1).toLocaleDateString('en-CA'); // Adjusted to use toLocaleDateString
+            const isVisible = visibleDates.has(date);
+            return (
+              <p key={dayIndex} className={`${styles.day} ${isVisible ? styles.highlight : ''}`}>
+                {day + 1}
+              </p>
+            );
+          })}
+        </div>
         </div>
       ))}
     </div>
