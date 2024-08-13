@@ -12,6 +12,9 @@ interface EntryProps {
   text: string;
   created: string;
 }
+interface StateProps {
+  highlightDates: string[];
+}
 
 /**
  * Component that displays the whole page, 
@@ -30,6 +33,16 @@ const Content: React.FC = () => {
   */
   const [entries, setEntries] = useState<EntryProps[]>([]);
   const [date, setDate] = useState<EntryProps[]>([]);
+  const [visibleDates, setVisibleDates] = useState<StateProps['highlightDates']>([]);
+
+  const highlightInSidebar = (data: string): void => {
+    // Create a Set from the array to remove duplicates
+    const uniqueDates = new Set(data);
+        // Convert the Set back to an array
+    const output = Array.from(uniqueDates);
+  
+    setVisibleDates(prevData => [...prevData, data]);
+  };
 
   // useEffect is a React hook that runs after the first render
   useEffect(() => {
@@ -44,13 +57,15 @@ const Content: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <Sidebar calendar={date} />
+      <Sidebar calendar={date} highlightedDates={visibleDates}/>
       <div className={styles.entrycontainer}>
         <div className={styles.placeholder}></div>
         {entries?.map((entry) => (
           <Entry 
             key={entry.id} 
-            entry={entry} />
+            entry={entry} 
+            //sendHighlightdata={highlightInSidebar}
+            />
         ))}
       </div>
     </div>

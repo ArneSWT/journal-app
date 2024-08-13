@@ -24,7 +24,7 @@
   flex-direction: column;
   flex-flow: column-reverse;
   overflow-y: scroll;
-  padding-left: 30px;
+  padding-left: 50px;
   padding-top: 30px;
   scrollbar-width: none; /* For Firefox */
   -ms-overflow-style: none;
@@ -41,6 +41,10 @@
   color: #454545;
 }
 
+.highlight {
+  background-color: yellow;
+}
+
 .entry {
   height: auto;
   min-height: 200px;
@@ -48,7 +52,9 @@
   padding: 0.2rem 1rem;
   margin: 0.5rem;
   border-radius: 2px;
+  border: 2px solid yellow;
 }
+
 
 .textarea {
   width: 100%;
@@ -83,22 +89,21 @@
 }
 
 .month {
-  font-weight: bold;
+  font-weight: 300;
 }
 
-.month_container {
-  margin-left: 50px;
-  display: flex;
-  flex-direction: column;
-  flex-flow: column-reverse;
-  height: 50vh;
-  overflow-y: scroll;
+
+
+.year {
+  font-weight: 300;
+  color:#747474;
+  padding-top: 5px;
+  font-size: 0.8rem;
 }
 
 .calendar_container {
   display: flex;
-  padding-left: 70%;
-  height: 50vh;
+  height: 100vh;
   width: 100%;
   overflow-y: scroll;
   flex-direction: column;
@@ -107,19 +112,38 @@
   -ms-overflow-style: none;
   scroll-behavior: smooth;
 }
-.calendar_container::-webkit-scrollbar {
-  display: none; /* For Chrome, Safari, and Opera */
+.month_container {
+  display: flex;
+  flex-direction: row;
 }
 
 .sticky {
   position: -webkit-sticky; /* For Safari */
+  height: 3rem;
   position: sticky;
-  top: 1rem;
-  transform: translateX(-200px) translateY(1rem);
-  z-index: 1000; /* Ensure it stays above other content */
+  top: 42.6px;
+  z-index: 1000;
+  flex: 1;
+  margin: 20px 0 0 60px; /* Ensure it stays above other content */
+}
+
+.days_container {
+  margin-top: 20px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; 
+}
+
+.calendar_container::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
 }
   
 .day {
-  margin-left: 1rem;
   margin-bottom: 1rem;
+}
+
+.gap {
+  min-height: 50vh;
 }

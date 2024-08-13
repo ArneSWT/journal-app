@@ -10,6 +10,7 @@ interface CalendarProps {
 
 interface SidebarProps {
   calendar: CalendarProps[];
+  highlightedDates: string[];
 }
 
 //returns just the day of the date
@@ -23,6 +24,9 @@ const formatDate = (dateString: string) => {
 
 const Sidebar: React.FC<SidebarProps> = ({calendar}) => {
   const currentYear = new Date().getFullYear();
+  const currentMonth = new Date().getMonth();
+  const currentDate = new Date().getDate();
+
   const months = Array.from({ length: 12 }, (_, i) => new Date(currentYear, i, 1));
 
   // filtering non-unique dates, so days with 
@@ -45,28 +49,28 @@ const Sidebar: React.FC<SidebarProps> = ({calendar}) => {
     </div>
   );
 */
-  return (
-    <div className={styles.sidebar}>
-      <div className={styles.calendar_container}>
-        {months.slice().reverse().map((month, monthIndex) => (
-          <div key={monthIndex}>
-            <div className={styles.sticky}>
-            <p className={`${styles.month}}`}>{
-              month.toLocaleString('default', { month: 'long' })}
+return (
+  <div className={styles.sidebar}>
+    <div className={styles.calendar_container}>
+      <div className={styles.placeholder}></div>
+      {months.slice(0, currentMonth + 1).reverse().map((month, monthIndex) => (
+        <div key={monthIndex} className={styles.month_container}>
+          <div className={styles.sticky}>
+            <p className={styles.month}>
+              {month.toLocaleString('default', { month: 'long' })}
             </p>
-            <p>
-              2024
-            </p>
-            </div>
-  
-            {Array.from({ length: new Date(currentYear, monthIndex + 1, 0).getDate() }, (_, dayIndex) => (
+            <p className={styles.year}>{currentYear}</p>
+          </div>
+          <div className={styles.days_container}>
+            {Array.from({ length: monthIndex === 0 ? currentDate : new Date(currentYear, currentMonth - monthIndex + 1, 0).getDate() }, (_, dayIndex) => (
               <p key={dayIndex} className={styles.day}>{dayIndex + 1}</p>
             ))}
-          </div> 
-        ))}
-      </div>
+          </div>
+        </div>
+      ))}
     </div>
-  );
+  </div>
+);
 };
 
 export default Sidebar;
