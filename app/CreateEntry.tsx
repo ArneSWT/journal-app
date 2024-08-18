@@ -41,6 +41,7 @@ export default function CreateEntry() {
     return (
         <form onSubmit={create}>
             <textarea
+                className = {`${styles.textarea} ${styles.newEntry}`}
                 placeholder='Write something...'
                 value={text}
                 onChange={(e) => {
@@ -48,7 +49,8 @@ export default function CreateEntry() {
                     setText(e.target.value);
                 }}
             />
-            <button type="submit">Create</button>
+             <button type="submit">Create</button> 
+            
         </form>
     );
 }

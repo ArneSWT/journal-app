@@ -72,7 +72,9 @@ return (
             <p className={styles.year}>{currentYear}</p>
           </div>
           <div className={styles.days_container}>
-          {Array.from({ length: monthIndex === 0 ? currentDate : new Date(currentYear, currentMonth - monthIndex + 1, 0).getDate() }, (_, dayIndex) => {
+          {Array.from({ length: monthIndex === 0 
+          ? currentDate 
+          : new Date(currentYear, currentMonth - monthIndex + 1, 0).getDate() }, (_, dayIndex) => {
             const day = dayIndex;
             const date = new Date(currentYear, currentMonth - monthIndex, day + 1).toLocaleDateString('en-CA'); // Adjusted to use toLocaleDateString
             const isVisible = visibleDates.has(date);
