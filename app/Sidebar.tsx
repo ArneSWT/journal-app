@@ -67,7 +67,7 @@ return (
         <div key={monthIndex} className={styles.month_container}>
           <div className={styles.sticky}>
             <p className={styles.month}>
-              {month.toLocaleString('default', { month: 'long' })}
+              {month.toLocaleString('en', { month: 'long' })} {/* Set locale to 'en' */}
             </p>
             <p className={styles.year}>{currentYear}</p>
           </div>

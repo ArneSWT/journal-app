@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import pb from '../services/pocketbase';
@@ -17,7 +19,6 @@ export default function CreateEntry() {
     const router = useRouter();
 
     const create = async (event: React.FormEvent) => {
-        event.preventDefault();
 
         console.log('Text before create:', text); // Debug log
 

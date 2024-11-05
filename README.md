@@ -1,4 +1,5 @@
 minimalistic journal app to quickly write down thoughts with a modern and smooth interface.
+built with react.
 
 # Next.js Project
 
@@ -34,3 +35,14 @@ To get a local copy up and running, follow these steps:
 To start the development server, run the following command:
 ```bash
 npm run dev
+```
+
+### Using PocketBase
+
+To use PocketBase, place the executable (.exe or .dmg) in the project folder and run:
+
+```bash
+./pocketbase serve
+```
+
+This will start the PocketBase server.
