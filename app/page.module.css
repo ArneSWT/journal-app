@@ -70,9 +70,28 @@
   outline: none; /* Remove default outline */
 }
 
+.button {
+  width: 70px;
+  height: 1.5rem;
+  border-radius: 20px;
+  background-color: var(--background-rgb); /* Light grey background */
+  color: #747474; /* Dark text color */
+  outline: none;
+  border: 1px solid #747474;
+  cursor: pointer;
+  margin-left: 27px;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+.button:hover {
+  background-color: white;
+  color: #454545;
+}
+
 .newEntry {
   padding: 0.2rem 1rem;
   margin: 0.5rem;
+  height: auto;
 }
 
 .textarea::-webkit-resizer {
@@ -151,6 +170,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 0.4rem;
   margin-bottom: 1rem;
   width: 36px;
 }

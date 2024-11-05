@@ -49,7 +49,7 @@ export default function CreateEntry() {
                     setText(e.target.value);
                 }}
             />
-             <button type="submit">Create</button> 
+             <button type="submit" className={styles.button}>Create</button> 
             
         </form>
     );

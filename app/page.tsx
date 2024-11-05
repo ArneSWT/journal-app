@@ -90,7 +90,7 @@ const Content: React.FC = () => {
       
       </div>
       
-      <div className={styles.visibleEntries}>
+      <div className={styles.visibleEntries} style={{ display: 'none' }}>
         <h2>Visible Entries</h2>
         <ul>
           {Array.from(visibleEntries).map(id => {
