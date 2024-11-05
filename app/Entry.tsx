@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState } from 'react';
 import { updateEntry } from '../services/entryService';
 import useDebounce from '../hooks/useDebounce';
 import styles from './page.module.css';
@@ -9,8 +9,9 @@ interface EntryProps {
     text: string;
     created: string;
   };
+  className?: string;
+  id?: string;
 }
-
 
 const formatDate = (dateString: string) => {
   const date = new Date(dateString);
@@ -21,7 +22,7 @@ const formatDate = (dateString: string) => {
   }).format(date);
 };
 
-const Entry: React.FC<EntryProps> = ({ entry }) => {
+const Entry: React.FC<EntryProps> = ({ entry, className, id }) => {
   const [text, setText] = useState(entry.text);
   const [isSaving, setIsSaving] = useState(false);
 
@@ -44,10 +45,10 @@ const Entry: React.FC<EntryProps> = ({ entry }) => {
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(e.target.value);
     debouncedSave(entry.id, e.target.value);
-  }
+  };
 
   return (
-    <div className={styles.entry}>
+    <div className={`${styles.entry} ${className}`} id={id}>
       <p className={styles.entrydate}>{formatDate(entry.created)}</p>
       <textarea className={styles.textarea} value={text} onChange={handleTextChange} />
       {isSaving && <p>Saving...</p>}
