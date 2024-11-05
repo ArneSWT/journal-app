@@ -1,3 +1,6 @@
+### demo
+https://youtu.be/bhD6zMhIjQg
+
 minimalistic journal app to quickly write down thoughts with a modern and smooth interface.
 built with react.
 
